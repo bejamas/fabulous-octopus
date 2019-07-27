@@ -1,0 +1,28 @@
+{
+    "title": "Bejamas Demo",
+    "header": {
+        "logo_img": "images/logo.svg"
+    },
+    "footer": {
+        "content": "Bejamas. All rights reserved",
+        "logo_img": "images/logo_footer.svg",
+        "socials": [
+            {
+                "element": "facebook",
+                "url": "https://www.facebook.com/bejamas.io"
+            },
+            {
+                "element": "twitter",
+                "url": "https://twitter.com/bejamas_io"
+            },
+            {
+                "element": "linkedin",
+                "url": "https://www.linkedin.com/company/bejamas/"
+            },
+            {
+                "element": "github",
+                "url": "https://github.com/bejamas"
+            }
+        ]
+    }
+}

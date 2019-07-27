@@ -1,0 +1,431 @@
+backend:
+  name: git-gateway
+  branch: master
+media_folder: static/images
+public_folder: /images
+collections:
+  - name: config
+    label: Global Site Config
+    files:
+      - name: config
+        label: Global Site Config
+        file: site-metadata.json
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            required: true
+            hint: Site title
+          - widget: object
+            name: header
+            label: Header Configuration
+            required: false
+            fields:
+              - widget: image
+                name: logo_img
+                label: Logo
+                required: false
+                hint: The logo image displayed on the left side.
+          - widget: object
+            name: footer
+            label: Footer Configuration
+            required: false
+            fields:
+              - widget: string
+                name: content
+                label: Footer Content
+                required: false
+                hint: The copyright text displayed in the footer.
+              - widget: image
+                name: logo_img
+                label: Logo
+                required: false
+                hint: The logo image displayed on the left side.
+              - widget: list
+                name: socials
+                label: Socials
+                required: false
+                hint: A list of social links displayed in the footer.
+                fields:
+                  - widget: select
+                    name: element
+                    label: Type of social
+                    required: true
+                    options:
+                      - label: Facebook
+                        value: facebook
+                      - label: Twitter
+                        value: twitter
+                      - label: LinkedIn
+                        value: linkedin
+                      - label: Github
+                        value: github
+                  - widget: string
+                    name: url
+                    label: URL
+                    required: false
+  - name: page
+    label: Pages
+    folder: src/pages/
+    create: true
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - widget: string
+        name: title
+        label: Title
+        required: true
+        hint: The title of the page.
+      - widget: string
+        name: heading
+        label: Heading
+        required: false
+        hint: The text shown just below the page title.
+      - widget: object
+        name: menus
+        label: Page Menus
+        required: false
+        hint: Which menus should this page show up in
+        fields:
+          - widget: object
+            name: main
+            label: Main menu item
+            required: false
+            hint: Main menu item for this page
+            fields:
+              - widget: string
+                name: title
+                label: Title
+                required: false
+                hint: The title of the menu item
+              - widget: number
+                name: weight
+                label: Weight
+                required: false
+                hint: Position for sorting
+                valueType: int
+              - widget: string
+                name: identifier
+                label: Identifier
+                required: false
+                hint: >-
+                  The identifier of a menu item could be used as a parent menu
+                  of another menu item
+          - widget: object
+            name: secondary
+            label: Secondary menu item
+            required: false
+            hint: Secondary menu item for this page
+            fields:
+              - widget: string
+                name: title
+                label: Title
+                required: false
+                hint: The title of the menu item
+              - widget: number
+                name: weight
+                label: Weight
+                required: false
+                hint: Position for sorting
+                valueType: int
+              - widget: string
+                name: identifier
+                label: Identifier
+                required: false
+                hint: >-
+                  The identifier of a menu item could be used as a parent menu
+                  of another menu item
+      - widget: hidden
+        name: template
+        label: Template
+        required: true
+        default: page
+      - widget: markdown
+        name: body
+        label: Content
+        required: false
+        hint: Page content
+    filter:
+      field: template
+      value: page
+  - name: social
+    label: Social Links
+    files:
+      - name: social
+        label: Social Links
+        file: src/data/socials.json
+        fields:
+          - widget: list
+            name: links
+            label: Social Links
+            required: false
+            hint: A list of social links displayed on the left side.
+            fields:
+              - widget: hidden
+                name: type
+                label: Type
+                required: false
+              - widget: string
+                name: title
+                label: Title
+                required: false
+              - widget: string
+                name: icon
+                label: Icon
+                required: true
+                hint: Font Awesome icon class name.
+              - widget: string
+                name: url
+                label: URL
+                required: false
+  - name: post
+    label: Posts
+    folder: src/pages/posts
+    create: true
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - widget: string
+        name: title
+        label: Title
+        required: true
+        hint: The title of the page.
+      - widget: string
+        name: excerpt
+        label: Description
+        required: false
+        hint: The text shown just below the post title on thumbnail.
+      - widget: image
+        name: image_thumbnail
+        label: Thumbnail Image
+        required: false
+        hint: The image shown in the feature.
+      - widget: object
+        name: button_link
+        label: Button Link
+        required: false
+        hint: The button link
+        fields:
+          - widget: string
+            name: name
+            label: Name
+            required: true
+          - widget: string
+            name: url
+            label: Link url
+            required: true
+          - widget: string
+            name: title
+            label: Link title
+            required: true
+      - widget: object
+        name: menus
+        label: Post Menus
+        required: false
+        hint: Which menus should this page show up in
+        fields:
+          - widget: object
+            name: main
+            label: Main menu item
+            required: false
+            hint: Main menu item for this page
+            fields:
+              - widget: string
+                name: title
+                label: Title
+                required: false
+                hint: The title of the menu item
+              - widget: number
+                name: weight
+                label: Weight
+                required: false
+                hint: Position for sorting
+                valueType: int
+              - widget: string
+                name: identifier
+                label: Identifier
+                required: false
+                hint: >-
+                  The identifier of a menu item could be used as a parent menu
+                  of another menu item
+          - widget: object
+            name: secondary
+            label: Secondary menu item
+            required: false
+            hint: Secondary menu item for this page
+            fields:
+              - widget: string
+                name: title
+                label: Title
+                required: false
+                hint: The title of the menu item
+              - widget: number
+                name: weight
+                label: Weight
+                required: false
+                hint: Position for sorting
+                valueType: int
+              - widget: string
+                name: identifier
+                label: Identifier
+                required: false
+                hint: >-
+                  The identifier of a menu item could be used as a parent menu
+                  of another menu item
+      - widget: hidden
+        name: template
+        label: Template
+        required: true
+        default: post
+      - widget: markdown
+        name: body
+        label: Content
+        required: false
+        hint: Page content
+    filter:
+      field: template
+      value: post
+  - name: blog
+    label: Blogs
+    folder: src/pages/
+    create: true
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - widget: string
+        name: title
+        label: Title
+        required: true
+        hint: The title of the page.
+      - widget: object
+        name: menus
+        label: Blog Menus
+        required: false
+        hint: Which menus should this page show up in
+        fields:
+          - widget: object
+            name: main
+            label: Main menu item
+            required: false
+            hint: Main menu item for this page
+            fields:
+              - widget: string
+                name: title
+                label: Title
+                required: false
+                hint: The title of the menu item
+              - widget: number
+                name: weight
+                label: Weight
+                required: false
+                hint: Position for sorting
+                valueType: int
+              - widget: string
+                name: identifier
+                label: Identifier
+                required: false
+                hint: >-
+                  The identifier of a menu item could be used as a parent menu
+                  of another menu item
+          - widget: object
+            name: secondary
+            label: Secondary menu item
+            required: false
+            hint: Secondary menu item for this page
+            fields:
+              - widget: string
+                name: title
+                label: Title
+                required: false
+                hint: The title of the menu item
+              - widget: number
+                name: weight
+                label: Weight
+                required: false
+                hint: Position for sorting
+                valueType: int
+              - widget: string
+                name: identifier
+                label: Identifier
+                required: false
+                hint: >-
+                  The identifier of a menu item could be used as a parent menu
+                  of another menu item
+      - widget: hidden
+        name: template
+        label: Template
+        required: true
+        default: blog
+      - widget: markdown
+        name: body
+        label: Content
+        required: false
+        hint: Page content
+    filter:
+      field: template
+      value: blog
+  - name: site_menus
+    label: Site Menus
+    files:
+      - name: site_menus
+        label: Site Menus
+        file: src/data/menus.json
+        fields:
+          - widget: list
+            name: main
+            label: Main menu
+            required: false
+            hint: List of items for Main menu
+            fields:
+              - widget: string
+                name: identifier
+                label: Identifier
+                required: true
+                hint: >-
+                  The identifier of a menu item could be used as a parent menu
+                  of another menu item
+              - widget: string
+                name: title
+                label: Title
+                required: true
+                hint: The title of the menu item
+              - widget: string
+                name: url
+                label: URL
+                required: true
+                hint: The URL the menu item links to
+              - widget: number
+                name: weight
+                label: Weight
+                required: false
+                hint: Position for sorting
+                valueType: int
+          - widget: list
+            name: secondary
+            label: Secondary menu
+            required: false
+            hint: List of items for Secondary menu
+            fields:
+              - widget: string
+                name: identifier
+                label: Identifier
+                required: true
+                hint: >-
+                  The identifier of a menu item could be used as a parent menu
+                  of another menu item
+              - widget: string
+                name: title
+                label: Title
+                required: true
+                hint: The title of the menu item
+              - widget: string
+                name: url
+                label: URL
+                required: true
+                hint: The URL the menu item links to
+              - widget: number
+                name: weight
+                label: Weight
+                required: false
+                hint: Position for sorting
+                valueType: int
